@@ -11,6 +11,7 @@ const Person = ({name, lastName, age, address}) => {
     <h2>Last Name: {lastName}</h2>
     <h2>Address: {age}</h2>
     <h2>Age: {address}</h2>
+    <h2>*********************************</h2>
     </>
   )
 }
@@ -89,10 +90,44 @@ const BreedList = () => {
 };
 
 
+const UseStateBasics = () => {
+  const [greeting, setGreeting] = useState('Rando-ness');
+  const handleChange = () => {
+   setGreeting(greeting === 'Rando-ness' ? 'I changed it!' : 'randoness');
+  }
+  return (
+    <>
+    <h1>{greeting}</h1>
+    <button onClick={handleChange}>Click to Change</button>
+    </>
+  )
+}
 
+const UseStateArray = () => {
+  const [people, setPeople] = useState(contactList);
 
-
-
+  const removeItem = (id) => {
+    let newPeople = people.filter((person) => person.id !== id);
+    setPeople(newPeople);
+  };
+  return (
+    <>
+      {people.map((person) => {
+        const { id, name, lastname} = person;
+        return (
+          <div key={id} className='item'>
+            <h4>{name}</h4>
+            <h4>{lastname}</h4>
+            <button onClick={() => removeItem(id)}>remove</button>
+          </div>
+        );
+      })}
+      <button className='btn' onClick={() => setPeople([])}>
+        clear items
+      </button>
+    </>
+  );
+};
 
 
 export default function App() {
@@ -101,6 +136,9 @@ export default function App() {
     <BreedList/>
     <People/>
     <Person name='Graham' lastName='Morrison' address='55 Waveney Rd'age={30} />
+    <UseStateBasics/>
+    <h2>**********************************</h2>
+    <UseStateArray/>
     </div> 
   )
 }
