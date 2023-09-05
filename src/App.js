@@ -129,54 +129,97 @@ import { useState, useEffect } from 'react';
 //   );
 // };
 
-const url = 'https://api.github.com/users';
+// const url = 'https://api.github.com/users';
 
-// second argument
+// // second argument
 
-const UseEffectFetchData = () => {
-  const [users, setUsers] = useState([]);
+// const UseEffectFetchData = () => {
+//   const [users, setUsers] = useState([])
 
-  const getUsers = async () => {
-    try{
-    const response = await fetch(url);
-    
+//   const getUsers = async () => {
+//     const response = await fetch(url);
+//     const users = await response.json()
+//     setUsers(users);
+//   }
+
+//   useEffect(() => {
+//     getUsers();
+//   }, []);
+//   return (
+//     <>
+//       <h3>github users display </h3>
+//       <ul className='users'>
+//         {users.map((user) => {
+//           const { id, login, avatar_url, html_url } = user;
+//           return (
+//             <li key={id}>
+//               <img src={avatar_url} alt={login} />
+//               <div>
+//                 <h4>{login}</h4>
+//                 <a href={html_url}>profile</a>
+//               </div>
+//             </li>
+//           );
+//         })}
+//       </ul>
+//     </>
+//   );
+// };
 
 
-    const users = await response.json();
-    setUsers(users);
-  } catch (error){
-    console.error('Error fetching data', error);
+// useEffect(() => {
+  //   fetch('http://localhost:8000/blogs')
+  //     .then(res => {
+    //       return res.json();
+    //     })
+//     .then(data => {
+  //       setBlogs(data);
+  //     })
+  // }, [])
+  
+  const url = 'https://dog.ceo/api/breeds/image/random/15';
+  
+  const DogPics = () => {
+    const [dogs, setDogs] = useState([]);
+  
+    useEffect(() => {
+      fetch(url)
+      .then(res => {
+        return res.json();
+      })
+      .then(data => {
+        if (data.status === "success") {
+        setDogs(data.message)
+      } else {
+        console.error("Failed to fetch dog images.");
+      }
+      })
+      .catch(error => {
+        console.error("Error fetching dog images:", error);
+      });
+    }, [])
+  
+    return (
+          <>
+            <h3>dog pics displayer </h3>
+            <ul >
+              {dogs.map((message, index) => (
+                  <li  key={index}>
+                    <img className='users img' src={message} alt={'Dog'} />
+                  </li>
+
+              ))}
+            </ul>
+          </>
+        );
+  
   }
-  };
-
-  useEffect(() => {
-    getUsers();
-  }, []);
-  return (
-    <>
-      <h3>github users</h3>
-      <ul className='users'>
-        {users.map((user) => {
-          const { id, login, avatar_url, html_url } = user;
-          return (
-            <li key={id}>
-              <img src={avatar_url} alt={login} />
-              <div>
-                <h4>{login}</h4>
-                <a href={html_url}>profile</a>
-              </div>
-            </li>
-          );
-        })}
-      </ul>
-    </>
-  );
-};
-
-export default function App() {
+  
+  export default function App() {
   return (
     <div className='App'>
-    <UseEffectFetchData/>
+    <DogPics/>
+    {/* <UseEffectFetchData/> */}
     {/* <BreedList/> */}
     {/* <People/>
     <Person name='Graham' lastName='Morrison' address='55 Waveney Rd'age={30} />
