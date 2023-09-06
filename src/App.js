@@ -4,36 +4,11 @@ import './App.css';
 import { useState, useEffect } from 'react';
 
 
-// const Person = ({name, lastName, age, address}) => {
-//   return (
-//     <>
-//     <h2 className="blue">Name: {name}</h2>
-//     <h2>Last Name: {lastName}</h2>
-//     <h2>Address: {age}</h2>
-//     <h2>Age: {address}</h2>
-//     <h2>*********************************</h2>
-//     </>
-//   )
-// }
-
-// const People = () => {
-//   return(
-//     <>
-//     {contactList.map(contacts =>
-//       <div className='box'>
-//       <h2>Name: {contacts.name}</h2>
-//       <p>Last Name: {contacts.lastname}</p>
-//       <p>Age: {contacts.age}</p>
-//       <p>Address: {contacts.address}</p>
-//       <p>Telephone: {contacts.telephone}</p>
-//       <p>---------------------------------</p>
-//       </div>
-//       )}
-//       </>
-//   )
-// }
 
 
+
+
+//Doglist Breed Selector from DogAPI
 
 
 // const BreedList = () => {
@@ -90,6 +65,8 @@ import { useState, useEffect } from 'react';
 // };
 
 
+//Basic useState example
+
 // const UseStateBasics = () => {
 //   const [greeting, setGreeting] = useState('Rando-ness');
 //   const handleChange = () => {
@@ -103,35 +80,10 @@ import { useState, useEffect } from 'react';
 //   )
 // }
 
-// const UseStateArray = () => {
-//   const [people, setPeople] = useState(contactList);
-
-//   const removeItem = (id) => {
-//     let newPeople = people.filter((person) => person.id !== id);
-//     setPeople(newPeople);
-//   };
-//   return (
-//     <>
-//       {people.map((person) => {
-//         const { id, name, lastname} = person;
-//         return (
-//           <div key={id} className='item'>
-//             <h4>{name}</h4>
-//             <h4>{lastname}</h4>
-//             <button onClick={() => removeItem(id)}>remove</button>
-//           </div>
-//         );
-//       })}
-//       <button className='btn' onClick={() => setPeople([])}>
-//         clear items
-//       </button>
-//     </>
-//   );
-// };
+//**Fetch API Example Github Users**
 
 // const url = 'https://api.github.com/users';
 
-// // second argument
 
 // const UseEffectFetchData = () => {
 //   const [users, setUsers] = useState([])
@@ -167,44 +119,39 @@ import { useState, useEffect } from 'react';
 // };
 
 
-// useEffect(() => {
-  //   fetch('http://localhost:8000/blogs')
-  //     .then(res => {
-    //       return res.json();
-    //     })
-//     .then(data => {
-  //       setBlogs(data);
-  //     })
-  // }, [])
+
   
-  const url = 'https://dog.ceo/api/breeds/image/random/15';
-  
-  const DogPics = () => {
-    const [dogs, setDogs] = useState([]);
-  
-    useEffect(() => {
-      fetch(url)
-      .then(res => {
-        return res.json();
-      })
-      .then(data => {
-        if (data.status === "success") {
-        setDogs(data.message)
-      } else {
-        console.error("Failed to fetch dog images.");
-      }
-      })
-      .catch(error => {
-        console.error("Error fetching dog images:", error);
-      });
-    }, [])
-  
-    return (
+ 
+
+
+    const url = 'https://dog.ceo/api/breeds/image/random/5';
+
+    const DoggiePics = () => {
+      const [dogs, setDogs] = useState([]);
+
+      useEffect(()=>{
+        fetch(url)
+        .then(res => {
+          return res.json();
+        })
+        .then(data => {
+          if(data.status === 'success'){
+            setDogs(data.message)
+          } else {
+            console.error('Failed to fetch dog images');
+          }
+        })
+        .catch(error => {
+          console.error("Error fetching dog images:", error);
+        });
+      },[])
+
+     return (
           <>
             <h3>dog pics displayer </h3>
             <ul >
               {dogs.map((message, index) => (
-                  <li  key={index}>
+                  <li  key={index} className="users img">
                     <img className='users img' src={message} alt={'Dog'} />
                   </li>
 
@@ -214,11 +161,30 @@ import { useState, useEffect } from 'react';
         );
   
   }
+
+
+
+
+  //   return (
+  //         <>
+  //           <h3>dog pics displayer </h3>
+  //           <ul >
+  //             {dogs.map((message, index) => (
+  //                 <li  key={index} className="users img">
+  //                   <img className='users img' src={message} alt={'Dog'} />
+  //                 </li>
+
+  //             ))}
+  //           </ul>
+  //         </>
+  //       );
+  
+  // }
   
   export default function App() {
   return (
     <div className='App'>
-    <DogPics/>
+    <DoggiePics/>
     {/* <UseEffectFetchData/> */}
     {/* <BreedList/> */}
     {/* <People/>
