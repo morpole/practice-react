@@ -124,43 +124,43 @@ import { useState, useEffect } from 'react';
  
 
 
-    const url = 'https://dog.ceo/api/breeds/image/random/5';
+  //   const url = 'https://dog.ceo/api/breeds/image/random/5';
 
-    const DoggiePics = () => {
-      const [dogs, setDogs] = useState([]);
+  //   const DoggiePics = () => {
+  //     const [dogs, setDogs] = useState([]);
 
-      useEffect(()=>{
-        fetch(url)
-        .then(res => {
-          return res.json();
-        })
-        .then(data => {
-          if(data.status === 'success'){
-            setDogs(data.message)
-          } else {
-            console.error('Failed to fetch dog images');
-          }
-        })
-        .catch(error => {
-          console.error("Error fetching dog images:", error);
-        });
-      },[])
+  //     useEffect(()=>{
+  //       fetch(url)
+  //       .then(res => {
+  //         return res.json();
+  //       })
+  //       .then(data => {
+  //         if(data.status === 'success'){
+  //           setDogs(data.message)
+  //         } else {
+  //           console.error('Failed to fetch dog images');
+  //         }
+  //       })
+  //       .catch(error => {
+  //         console.error("Error fetching dog images:", error);
+  //       });
+  //     },[])
 
-     return (
-          <>
-            <h3>dog pics displayer </h3>
-            <ul >
-              {dogs.map((message, index) => (
-                  <li  key={index} className="users img">
-                    <img className='users img' src={message} alt={'Dog'} />
-                  </li>
+  //    return (
+  //         <>
+  //           <h3>dog pics displayer </h3>
+  //           <ul >
+  //             {dogs.map((message, index) => (
+  //                 <li  key={index} className="users img">
+  //                   <img className='users img' src={message} alt={'Dog'} />
+  //                 </li>
 
-              ))}
-            </ul>
-          </>
-        );
+  //             ))}
+  //           </ul>
+  //         </>
+  //       );
   
-  }
+  // }
 
 
 
@@ -181,17 +181,74 @@ import { useState, useEffect } from 'react';
   
   // }
   
-  export default function App() {
+
+ 
+
+  // const WorldTime = () => {
+  //   const [data, setData] = useState(null);
+  
+    // useEffect(() => {
+    //   const fetchData = async () => {
+    //     const url = 'http://worldtimeapi.org/api/timezone/Europe/Dublin';
+    //     try {
+    //       const response = await fetch(url);
+    //       if (!response.ok) {
+    //         throw new Error(`HTTP Error! Status: ${response.status}`);
+    //       }
+    //       const responseData = await response.json();
+    //       setData(responseData);
+    //     } catch (error) {
+    //       console.error('An error occurred:', error);
+    //     }
+    //   };
+  
+    //   fetchData();
+    // }, []);
+  
+   
+
+  //   return (
+  //     <div className="App">
+  //       <h1>Data from WorldTimeAPI</h1>
+  //       <pre>{JSON.stringify(data, null, 1)}</pre>
+        
+  //     </div>
+  //   );
+  // };
+  
+
+
+  
+
+
+const BigFetcher = () => {
+
+  const [data, setData] = useState(null); 
+
+  useEffect(()=>{
+    const getData = async () => {
+    const url = 'http://worldtimeapi.org/api/timezone/Europe/Dublin';
+    const response =  await fetch(url);
+    const responseData = await response.json();
+    setData(responseData);
+    };
+    getData();
+  },[])
+
+  return (
+    <div>
+      <h2>Big Time Travelor Sham!</h2>
+      <pre>{JSON.stringify(data, null, 2)}</pre>
+    </div>
+  )
+};
+
+
+export default function App() {
   return (
     <div className='App'>
-    <DoggiePics/>
-    {/* <UseEffectFetchData/> */}
-    {/* <BreedList/> */}
-    {/* <People/>
-    <Person name='Graham' lastName='Morrison' address='55 Waveney Rd'age={30} />
-    <UseStateBasics/>
-    <h2>**********************************</h2>
-    <UseStateArray/> */}
+    {/* <WorldTime/> */}
+   <BigFetcher/>
     </div> 
   )
 }
