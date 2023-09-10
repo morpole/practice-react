@@ -1,7 +1,7 @@
 // import React from "react";
 // import './App.css';
 // // import contactList from "./contacts";
-// import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 // // const Person = ({name, lastName, age, address}) => {
 // //   return (
@@ -224,181 +224,123 @@
 //   );
 // };
 
-const url = "https://api.github.com/users";
+// const url = "https://api.github.com/users";
 
-// second argument
+//   const url = 'https://dog.ceo/api/breeds/image/random/5';
 
-<<<<<<< HEAD
-const UseEffectFetchData = () => {
-  const [users, setUsers] = useState([]);
+//   const DoggiePics = () => {
+//     const [dogs, setDogs] = useState([]);
 
-  const getUsers = async () => {
-    try {
-      const response = await fetch(url);
+//     useEffect(()=>{
+//       fetch(url)
+//       .then(res => {
+//         return res.json();
+//       })
+//       .then(data => {
+//         if(data.status === 'success'){
+//           setDogs(data.message)
+//         } else {
+//           console.error('Failed to fetch dog images');
+//         }
+//       })
+//       .catch(error => {
+//         console.error("Error fetching dog images:", error);
+//       });
+//     },[])
 
-      const users = await response.json();
-      setUsers(users);
-    } catch (error) {
-      console.error("Error fetching data", error);
-    }
-  };
+//    return (
+//         <>
+//           <h3>dog pics displayer </h3>
+//           <ul >
+//             {dogs.map((message, index) => (
+//                 <li  key={index} className="users img">
+//                   <img className='users img' src={message} alt={'Dog'} />
+//                 </li>
 
-  useEffect(() => {
-    getUsers();
-  }, []);
-  return (
-    <>
-      <h3>github users</h3>
-      <ul className="users">
-        {users.map((user) => {
-          const { id, login, avatar_url, html_url } = user;
-          return (
-            <li key={id}>
-              <img src={avatar_url} alt={login} />
-              <div>
-                <h4>{login}</h4>
-                <a href={html_url}>profile</a>
-              </div>
-            </li>
-          );
-        })}
-      </ul>
-    </>
-  );
-};
-=======
-  
- 
+//             ))}
+//           </ul>
+//         </>
+//       );
 
+// }
 
-  //   const url = 'https://dog.ceo/api/breeds/image/random/5';
+//   return (
+//         <>
+//           <h3>dog pics displayer </h3>
+//           <ul >
+//             {dogs.map((message, index) => (
+//                 <li  key={index} className="users img">
+//                   <img className='users img' src={message} alt={'Dog'} />
+//                 </li>
 
-  //   const DoggiePics = () => {
-  //     const [dogs, setDogs] = useState([]);
+//             ))}
+//           </ul>
+//         </>
+//       );
 
-  //     useEffect(()=>{
-  //       fetch(url)
-  //       .then(res => {
-  //         return res.json();
-  //       })
-  //       .then(data => {
-  //         if(data.status === 'success'){
-  //           setDogs(data.message)
-  //         } else {
-  //           console.error('Failed to fetch dog images');
-  //         }
-  //       })
-  //       .catch(error => {
-  //         console.error("Error fetching dog images:", error);
-  //       });
-  //     },[])
+// }
 
-  //    return (
-  //         <>
-  //           <h3>dog pics displayer </h3>
-  //           <ul >
-  //             {dogs.map((message, index) => (
-  //                 <li  key={index} className="users img">
-  //                   <img className='users img' src={message} alt={'Dog'} />
-  //                 </li>
+// const WorldTime = () => {
+//   const [data, setData] = useState(null);
 
-  //             ))}
-  //           </ul>
-  //         </>
-  //       );
-  
-  // }
+// useEffect(() => {
+//   const fetchData = async () => {
+//     const url = 'http://worldtimeapi.org/api/timezone/Europe/Dublin';
+//   try {
+//     const response = await fetch(url);
+//     if (!response.ok) {
+//       throw new Error(`HTTP Error! Status: ${response.status}`);
+//     }
+//     const responseData = await response.json();
+//     setData(responseData);
+//   } catch (error) {
+//     console.error('An error occurred:', error);
+//   }
+// };
 
+//   fetchData();
+// }, []);
 
+//   return (
+//     <div className="App">
+//       <h1>Data from WorldTimeAPI</h1>
+//       <pre>{JSON.stringify(data, null, 1)}</pre>
 
-
-  //   return (
-  //         <>
-  //           <h3>dog pics displayer </h3>
-  //           <ul >
-  //             {dogs.map((message, index) => (
-  //                 <li  key={index} className="users img">
-  //                   <img className='users img' src={message} alt={'Dog'} />
-  //                 </li>
-
-  //             ))}
-  //           </ul>
-  //         </>
-  //       );
-  
-  // }
-  
-
- 
-
-  // const WorldTime = () => {
-  //   const [data, setData] = useState(null);
-  
-    // useEffect(() => {
-    //   const fetchData = async () => {
-    //     const url = 'http://worldtimeapi.org/api/timezone/Europe/Dublin';
-    //     try {
-    //       const response = await fetch(url);
-    //       if (!response.ok) {
-    //         throw new Error(`HTTP Error! Status: ${response.status}`);
-    //       }
-    //       const responseData = await response.json();
-    //       setData(responseData);
-    //     } catch (error) {
-    //       console.error('An error occurred:', error);
-    //     }
-    //   };
-  
-    //   fetchData();
-    // }, []);
-  
-   
-
-  //   return (
-  //     <div className="App">
-  //       <h1>Data from WorldTimeAPI</h1>
-  //       <pre>{JSON.stringify(data, null, 1)}</pre>
-        
-  //     </div>
-  //   );
-  // };
-  
-
-
-  
-
+//     </div>
+//   );
+// };
 
 const BigFetcher = () => {
   const [data, setData] = useState(null);
-  useEffect(()=>{
-    const getData = async() => {
-      const url = 'http://worldtimeapi.org/api/timezone/Europ/Dublin';
+  useEffect(() => {
+    const url = "http://worldtimeapi.org/api/timezone/Europe/Dublin";
+
+    const getData = async () => {
       try {
-      const response = await fetch(url);
-      if(!response.ok) {
-        throw new Error(`HTTP Error! Status: ${response.status}`);
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`HTTP Error Status: ${response.status}`);
+        }
+        const responseData = await response.json();
+        setData(responseData);
+      } catch (error) {
+        console.error("An error occurred:", error);
       }
-      const responseData = await response.json();
-      setData(responseData);
-      } catch(error) {
-        console.error('An error occured:', error);
-      }
-    }
+    };
     getData();
-  }, [])
+  }, []);
   return (
-    <div>
-      <h3>World Clock</h3>
+    <>
+      <h2>World Clock</h2>
       <pre>{JSON.stringify(data, null, 2)}</pre>
-    </div>
-  )
-}
->>>>>>> 7a4e8d0ae20c4915b1a1130d8b20e77836b6307a
+    </>
+  );
+};
 
 export default function App() {
   return (
     <div className="App">
-      <UseEffectFetchData />
+      <BigFetcher />
       {/* <BreedList/> */}
       {/* <People/>
     <Person name='Graham' lastName='Morrison' address='55 Waveney Rd'age={30} />
