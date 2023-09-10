@@ -228,6 +228,7 @@ const url = "https://api.github.com/users";
 
 // second argument
 
+<<<<<<< HEAD
 const UseEffectFetchData = () => {
   const [users, setUsers] = useState([]);
 
@@ -265,6 +266,134 @@ const UseEffectFetchData = () => {
     </>
   );
 };
+=======
+  
+ 
+
+
+  //   const url = 'https://dog.ceo/api/breeds/image/random/5';
+
+  //   const DoggiePics = () => {
+  //     const [dogs, setDogs] = useState([]);
+
+  //     useEffect(()=>{
+  //       fetch(url)
+  //       .then(res => {
+  //         return res.json();
+  //       })
+  //       .then(data => {
+  //         if(data.status === 'success'){
+  //           setDogs(data.message)
+  //         } else {
+  //           console.error('Failed to fetch dog images');
+  //         }
+  //       })
+  //       .catch(error => {
+  //         console.error("Error fetching dog images:", error);
+  //       });
+  //     },[])
+
+  //    return (
+  //         <>
+  //           <h3>dog pics displayer </h3>
+  //           <ul >
+  //             {dogs.map((message, index) => (
+  //                 <li  key={index} className="users img">
+  //                   <img className='users img' src={message} alt={'Dog'} />
+  //                 </li>
+
+  //             ))}
+  //           </ul>
+  //         </>
+  //       );
+  
+  // }
+
+
+
+
+  //   return (
+  //         <>
+  //           <h3>dog pics displayer </h3>
+  //           <ul >
+  //             {dogs.map((message, index) => (
+  //                 <li  key={index} className="users img">
+  //                   <img className='users img' src={message} alt={'Dog'} />
+  //                 </li>
+
+  //             ))}
+  //           </ul>
+  //         </>
+  //       );
+  
+  // }
+  
+
+ 
+
+  // const WorldTime = () => {
+  //   const [data, setData] = useState(null);
+  
+    // useEffect(() => {
+    //   const fetchData = async () => {
+    //     const url = 'http://worldtimeapi.org/api/timezone/Europe/Dublin';
+    //     try {
+    //       const response = await fetch(url);
+    //       if (!response.ok) {
+    //         throw new Error(`HTTP Error! Status: ${response.status}`);
+    //       }
+    //       const responseData = await response.json();
+    //       setData(responseData);
+    //     } catch (error) {
+    //       console.error('An error occurred:', error);
+    //     }
+    //   };
+  
+    //   fetchData();
+    // }, []);
+  
+   
+
+  //   return (
+  //     <div className="App">
+  //       <h1>Data from WorldTimeAPI</h1>
+  //       <pre>{JSON.stringify(data, null, 1)}</pre>
+        
+  //     </div>
+  //   );
+  // };
+  
+
+
+  
+
+
+const BigFetcher = () => {
+  const [data, setData] = useState(null);
+  useEffect(()=>{
+    const getData = async() => {
+      const url = 'http://worldtimeapi.org/api/timezone/Europ/Dublin';
+      try {
+      const response = await fetch(url);
+      if(!response.ok) {
+        throw new Error(`HTTP Error! Status: ${response.status}`);
+      }
+      const responseData = await response.json();
+      setData(responseData);
+      } catch(error) {
+        console.error('An error occured:', error);
+      }
+    }
+    getData();
+  }, [])
+  return (
+    <div>
+      <h3>World Clock</h3>
+      <pre>{JSON.stringify(data, null, 2)}</pre>
+    </div>
+  )
+}
+>>>>>>> 7a4e8d0ae20c4915b1a1130d8b20e77836b6307a
 
 export default function App() {
   return (
