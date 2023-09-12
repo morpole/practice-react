@@ -223,27 +223,27 @@ import { useState, useEffect } from 'react';
 
 const BigFetcher = () => {
   const [data, setData] = useState(null);
-  useEffect(()=>{
-    const getData = async() => {
-      const url = 'http://worldtimeapi.org/api/timezone/Europ/Dublin';
+  useEffect(() => {
+    const getData = async () => {
+      const url = 'http://worldtimeapi.org/api/timezone/Europe/Dublin';
       try {
-      const response = await fetch(url);
-      if(!response.ok) {
-        throw new Error(`HTTP Error! Status: ${response.status}`);
+        const response = await fetch(url);
+        if(!response.ok) {
+          throw new Error(` HTTP error, status: ${response.status}`)
+        }
+        const responseData = await response.json();
+        setData(responseData); 
+      } catch (error) {
+        console.error('An error occurred', error)
       }
-      const responseData = await response.json();
-      setData(responseData);
-      } catch(error) {
-        console.error('An error occured:', error);
-      }
-    }
+    };
     getData();
-  }, [])
+  }, []);
   return (
-    <div>
-      <h3>World Clock</h3>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
-    </div>
+    <>
+    <h2>Timezones:</h2>
+    <pre>{JSON.stringify(data, null ,2)}</pre>
+    </>
   )
 }
 
@@ -253,5 +253,4 @@ export default function App() {
     {/* <WorldTime/> */}
    <BigFetcher/>
     </div> 
-  )
-}
+  )}
