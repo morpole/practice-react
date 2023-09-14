@@ -310,37 +310,81 @@ import { useState, useEffect } from "react";
 //   );
 // };
 
-const BigFetcher = () => {
-  const [data, setData] = useState(null);
-  useEffect(()=>{
-    const getData = async() => {
-      const url = 'http://worldtimeapi.org/api/timezone/Europ/Dublin';
-      try {
-      const response = await fetch(url);
-      if(!response.ok) {
-        throw new Error(`HTTP Error! Status: ${response.status}`);
+// const BigFetcher = () => {
+//   const [data, setData] = useState(null);
+//   useEffect(() => {
+//     const getData = async () => {
+//       const url = 'http://worldtimeapi.org/api/timezone/Europe/London';
+//       try {
+//         const res = await fetch(url);
+//         if(!res.ok) {
+//           throw new Error(`HTTP error! Status: ${res.status}`);
+//         }
+//         const resData = await res.json();
+//         setData(resData);
+//       } catch (error) {
+//         console.error('An error occurred:', error);
+//       }
+//     };
+//     getData();
+//   }, []);
+//   return (
+//     <>
+//     <h2>World International Time</h2>
+//     <pre>{JSON.stringify(data, null , 2)}</pre>
+//     </>
+//   )
+// };
+
+
+
+
+const Weather = () => {
+  const [weatherData, setWeatherData] = useState(null);
+  const apiKey = 'e2446794f4df7f85a6913c2be544f039';
+  const city = 'dublin,ie';
+
+  const fetchWeatherData = async () => {
+    try {
+      const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`);
+      if (!response.ok) {
+        throw new Error('Weather data not found');
       }
-      const responseData = await response.json();
-      setData(responseData);
-      } catch(error) {
-        console.error('An error occured:', error);
-      }
-    };
-    getData();
-  }, []);
+      const data = await response.json();
+      setWeatherData(data);
+    } catch (error) {
+      console.error('Error fetching weather data:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchWeatherData();
+  }, [city, apiKey]);
+
+  if (!weatherData) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
-      <h3>World Clock</h3>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+      <h2>Weather in {weatherData.name}</h2>
+      {/*add converter or find out how to display these lines of temp in celcius not kelvin */}
+      <p>Temperature: {weatherData.main.temp}°C</p>
+      <p>Feels like:{weatherData.main.feels_like}°C</p>
+      {/* ********************************************************** */}
+      <img src={weatherData.weather.icon} alt = 'weather icon'/>
+      <p>Weather: {weatherData.weather[0].description}</p>
     </div>
-  )
-}
+  );
+};
+
+
+
 
 export default function App() {
   return (
     <div className='App'>
-    {/* <WorldTime/> */}
-   <BigFetcher/>
+   <Weather/>
     </div> 
   )
 }
